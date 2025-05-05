@@ -50,5 +50,18 @@ public class ProductoController {
         }
     }
 
+    //TODO: Actualizar producto por id
+    @PutMapping("/productos/{id}")
+    public ResponseEntity<Producto> actualizarProducto(@PathVariable int id, @RequestBody Producto productoRecibido){
+        Producto producto = this.productoService.buscarProductoPorId(id);
+        producto.setDescripcion(productoRecibido.getDescripcion());
+        producto.setPrecio(productoRecibido.getPrecio());
+        producto.setExistencia(productoRecibido.getExistencia());
+
+        //TODO: guardamos la informacion
+        this.productoService.guardarProducto(producto);
+        return ResponseEntity.ok(producto);
+    }
+
 
 }
